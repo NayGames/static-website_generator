@@ -1,0 +1,54 @@
+version(1);
+
+project_name = "Static-website Gemerator";
+
+patterns = 
+{
+	"*.c",
+	"*.h",
+	"*.bat",
+	"*.4coder"
+};
+
+blacklist_pattern = 
+{
+	".*",
+	"*.meta.cpp"
+};
+
+load_paths =
+{
+	{
+		{ {"."}, .recursive = true, .relative = true }, .os = "win"
+	}
+};
+
+command_list =
+{
+	{
+		.name = "build",
+		.out = "*compilation*",
+		.footer_panel = true,
+		.save_dirty_files = true,
+		.cursor_at_end = false,
+		.cmd = 
+		{
+			{ "build.bat", .os = "win" }
+		}
+	},
+	
+	{
+		.name = "run",
+		.out = "*compilation*",
+		.footer_panel = true,
+		.save_dirty_files = true,
+		.cursor_at_end = false,
+		.cmd = 
+		{
+			{ "pushd build && generator.exe && popd", .os = "win" }
+		}
+	}
+};
+
+fkey_command[1] = "build";
+fkey_command[2] = "run";
